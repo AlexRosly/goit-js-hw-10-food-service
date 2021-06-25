@@ -1,4 +1,4 @@
-import descriptionCardTpl from './templates/description-card.hbs';
+import menuCardTpl from './templates/menu-card.hbs';
 import menu from './menu.json'
 import './sass/main.scss';
 
@@ -10,18 +10,19 @@ const Theme = {
 const menuCards = document.querySelector('.js-menu');
 const themeSwitchControl = document.querySelector('.theme-switch__toggle');
 const body = document.querySelector('body');
-// console.log(themeSwitchControl);
+
 themeSwitchControl.addEventListener('change', changeSwitchControl);
 
 setLocalStorage();
 
-const markup = descriptionCardTpl(menu);
+const markup = menuCardTpl(menu);
 menuCards.insertAdjacentHTML('beforeend', markup);
 
-function changeSwitchControl(e) {
-  console.log(e.target.checked);
+
+function changeSwitchControl() {
+
   const check = themeSwitchControl.checked;
-  console.log(check);
+
   if (check) {
     body.classList.add(Theme.DARK);
     body.classList.remove(Theme.LIGHT);
@@ -35,8 +36,9 @@ function changeSwitchControl(e) {
 }
 
 function setLocalStorage() {
+
   const getTheme = localStorage.getItem("theme");
-  console.log(getTheme);
+
   if (getTheme === 'dark-theme') {
     body.classList.add(Theme.DARK);
     themeSwitchControl.checked = true;
